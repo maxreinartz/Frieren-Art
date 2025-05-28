@@ -1,4 +1,3 @@
-// onpage load, add a random image from the api to the image div
 document.addEventListener("DOMContentLoaded", () => {
   const imgContainer = document.querySelector(".image");
 
@@ -23,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const slideMenu = document.querySelector(".slide-menu");
   const menuOverlay = document.querySelector(".menu-overlay");
+  const fullscreenOverlay = document.querySelector(".fullscreen-overlay");
 
   menuToggle.addEventListener("click", () => {
     slideMenu.classList.toggle("show");
@@ -38,6 +38,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.key === "Escape") {
       slideMenu.classList.remove("show");
       menuOverlay.classList.remove("show");
+    }
+  });
+
+  imgContainer.addEventListener("click", (event) => {
+    if (event.target.tagName === "IMG") {
+      const fullScreenImg = document.createElement("img");
+      fullScreenImg.src = event.target.src;
+      fullScreenImg.style.zIndex = "2";
+      fullScreenImg.classList.add("fullscreen");
+      document.body.appendChild(fullScreenImg);
+      fullscreenOverlay.classList.add("show");
+      
+      fullScreenImg.addEventListener("click", () => {
+        document.body.removeChild(fullScreenImg);
+        fullscreenOverlay.classList.remove("show");
+      });
     }
   });
 });
