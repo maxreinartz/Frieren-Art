@@ -1,7 +1,9 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const { method } = require("requests");
 const app = express();
+require("dotenv").config();
 const port = process.env.PORT || 7689;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -9,12 +11,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/img/random', sendRandomImage('img'));
 app.get('/api/img/sfw', sendSFWImage('img'));
 app.get('/api/img/nsfw', sendNSFWImage('img'));
+app.get('/api/lastUpdate', (req, res) => {
+  const lastUpdate = new Date(fs.statSync(path.join(__dirname, 'img')).mtime);
+  res.json({ lastUpdate: lastUpdate.toISOString() });
+});
 app.get('/api/endpoints', (req, res) => {
   res.json({
     endpoints: [
       { method: 'GET', path: '/api/img/random', description: 'Get a random image' },
       { method: 'GET', path: '/api/img/sfw', description: 'Get a random SFW image' },
       { method: 'GET', path: '/api/img/nsfw', description: 'Get a random NSFW image' },
+      { method: 'GET', path: '/api/lastUpdate', description: 'Get the last update' },
       { method: 'GET', path: '/api/endpoints', description: 'List all available API endpoints' }
     ]
   });

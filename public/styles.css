@@ -78,7 +78,7 @@ a {
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   color: var(--secondary-color);
   bottom: -15px;
   left: 50%;
@@ -106,19 +106,32 @@ footer {
   filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%) hue-rotate(213deg) brightness(102%) contrast(97%);
 }
 
-.menu-toggle {
+.button-icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
   position: absolute;
-  top: 20px;
-  left: 20px;
   transition: filter 0.3s ease;
-  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%) hue-rotate(218deg) brightness(82%) contrast(89%);;
+  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%) hue-rotate(218deg) brightness(82%) contrast(89%);
 }
 
-.menu-toggle:hover {
+.button-icon:hover {
   filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%) hue-rotate(213deg) brightness(102%) contrast(97%);
+}
+
+.menu-toggle {
+  top: 20px;
+  left: 20px;
+}
+
+.refresh {
+  top: 20px;
+  right: 20px;
+}
+
+.download {
+  top: 56px;
+  right: 20px;
 }
 
 .last-updated {
@@ -127,7 +140,8 @@ footer {
   text-align: center;
   position: absolute;
   bottom: 10px;
-  left: -60px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
 }
 
