@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fullScreenImg.classList.add("fullscreen");
       document.body.appendChild(fullScreenImg);
       fullscreenOverlay.classList.add("show");
-      
+
       fullScreenImg.addEventListener("click", () => {
         document.body.removeChild(fullScreenImg);
         fullscreenOverlay.classList.remove("show");
@@ -58,12 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   downloadButton.addEventListener("click", () => {
-    const imgElement = imgContainer.querySelector("img");
-    const randomChars = Math.random().toString(36).substring(2, 7);
-    if (imgElement) {
+    const mediaElement = imgContainer.querySelector(".random-media");
+    if (mediaElement) {
       const link = document.createElement("a");
-      link.href = imgElement.src;
-      link.download = `frieren-${randomChars}.jpg`;
+      link.href = mediaElement.src;
+      link.download = mediaElement.alt || "downloaded_media";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -81,17 +80,30 @@ function newImage() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.blob();
+      return response.json();
     })
-    .then((blob) => {
-      const imgURL = URL.createObjectURL(blob);
-      const imgElement = document.createElement("img");
-      imgElement.src = imgURL;
-      imgElement.alt = "Random Frieren Art";
-      imgContainer.appendChild(imgElement);
+    .then((data) => {
+      let mediaElement;
+      const isVideo = data.image.endsWith(".mp4");
+      if (isVideo) {
+        console.log("Recieved video, requesting new image.");
+        newImage();
+        return;
+      } else {
+        mediaElement = document.createElement("img");
+        mediaElement.src = data.image;
+        mediaElement.alt = data.credit.filename || "Random Image";
+        mediaElement.classList.add("random-media");
+      }
+      imgContainer.appendChild(mediaElement);
+
+      const creditElement = document.createElement("p");
+      creditElement.innerHTML = `Image By <a href="${data.credit.author_url}" target="_blank" rel="noopener noreferrer">${data.credit.author}</a>, <a href="${data.credit.post_url}" target="_blank" rel="noopener noreferrer">Source</a>`;
+      creditElement.classList.add("image-credit");
+      imgContainer.appendChild(creditElement);
     })
     .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-      imgContainer.innerHTML = "<p>Failed to load image</p>";
+      console.error("Error fetching random image:", error);
+      imgContainer.innerHTML = "<p>Error loading image</p>";
     });
 }

@@ -2,7 +2,7 @@
   --primary-color: rgb(245, 242, 250);
   --secondary-color: rgb(159, 147, 184);
   --link-color: rgb(117, 234, 212);
-  --background-color:rgb(28, 24, 35);
+  --background-color: rgb(28, 24, 35);
   --background-color-secondary: rgb(46, 41, 58);
 }
 
@@ -45,6 +45,16 @@ body {
   height: auto;
   border-radius: 8px;
   object-fit: contain;
+}
+
+.image-credit {
+  position: absolute;
+  bottom: 60px;
+  color: var(--secondary-color);
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .fullscreen {
@@ -99,11 +109,13 @@ footer {
   width: 18px;
   height: 18px;
   transition: filter 0.3s ease;
-  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%) hue-rotate(218deg) brightness(82%) contrast(89%);;
+  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%)
+    hue-rotate(218deg) brightness(82%) contrast(89%);
 }
 
 .socials a:hover .social-icon {
-  filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%) hue-rotate(213deg) brightness(102%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%)
+    hue-rotate(213deg) brightness(102%) contrast(97%);
 }
 
 .button-icon {
@@ -112,11 +124,13 @@ footer {
   cursor: pointer;
   position: absolute;
   transition: filter 0.3s ease;
-  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%) hue-rotate(218deg) brightness(82%) contrast(89%);
+  filter: brightness(0) saturate(100%) invert(73%) sepia(7%) saturate(1145%)
+    hue-rotate(218deg) brightness(82%) contrast(89%);
 }
 
 .button-icon:hover {
-  filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%) hue-rotate(213deg) brightness(102%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(94%) sepia(8%) saturate(115%)
+    hue-rotate(213deg) brightness(102%) contrast(97%);
 }
 
 .menu-toggle {
@@ -130,8 +144,8 @@ footer {
 }
 
 .download {
-  top: 56px;
-  right: 20px;
+  top: 20px;
+  right: 56px;
 }
 
 .last-updated {
